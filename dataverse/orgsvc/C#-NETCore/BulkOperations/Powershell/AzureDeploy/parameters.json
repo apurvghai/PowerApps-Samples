@@ -1,0 +1,56 @@
+{
+    "parameters":  {
+                       "netFrameworkVersion":  {
+                                                   "value":  "v6.0"
+                                               },
+                       "subscriptionId":  {
+                                              "value":  "1d21e91c-e30a-4bd7-9a45-ac53969dcbc7"
+                                          },
+                       "keyVaultUrl":  {
+                                           "value":  "https://dv-test-apurvgh.vault.azure.net/"
+                                       },
+                       "hostingPlanName":  {
+                                               "value":  "ASP-apurvgh638303919700539301-638303919700539301"
+                                           },
+                       "ftpsState":  {
+                                         "value":  "FtpsOnly"
+                                     },
+                       "use32BitWorkerProcess":  {
+                                                     "value":  false
+                                                 },
+                       "sku":  {
+                                   "value":  "ElasticPremium"
+                               },
+                       "alwaysOn":  {
+                                        "value":  false
+                                    },
+                       "serverFarmResourceGroup":  {
+                                                       "value":  "APURVGH"
+                                                   },
+                       "websiteContentName":  {
+                                                  "value":  "apurvgh_share"
+                                              },
+                       "workerSize":  {
+                                          "value":  "5"
+                                      },
+                       "workerSizeId":  {
+                                            "value":  "5"
+                                        },
+                       "numberOfWorkers":  {
+                                               "value":  "5"
+                                           },
+                       "location":  {
+                                        "value":  "East US"
+                                    },
+                       "skuCode":  {
+                                       "value":  "EP3"
+                                   },
+                       "name":  {
+                                    "value":  "apurvgh638303919700539301"
+                                },
+                       "storageAccountName":  {
+                                                  "value":  "stghdssdssdas"
+                                              }
+                   },
+    "contentVersion":  "1.0.0.0"
+}

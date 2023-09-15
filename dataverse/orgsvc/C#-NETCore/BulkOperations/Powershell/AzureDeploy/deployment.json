@@ -1,0 +1,147 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "netFrameworkVersion": {
+      "type": "string"
+    },
+    "skuCode": {
+      "type": "string"
+    },
+    "sku": {
+      "type": "string"
+    },
+    "numberOfWorkers": {
+      "type": "string"
+    },
+    "workerSize": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "alwaysOn": {
+      "type": "bool"
+    },
+    "workerSizeId": {
+      "type": "string"
+    },
+    "websiteContentName": {
+      "type": "string"
+    },
+    "serverFarmResourceGroup": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "ftpsState": {
+      "type": "string"
+    },
+    "hostingPlanName": {
+      "type": "string"
+    },
+    "storageAccountName": {
+      "type": "string"
+    },
+    "subscriptionId": {
+      "type": "string"
+    },
+    "use32BitWorkerProcess": {
+      "type": "bool"
+    },
+    "keyVaultUrl": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2018-11-01",
+      "name": "[parameters('name')]",
+      "type": "Microsoft.Web/sites",
+      "kind": "functionapp",
+      "location": "[parameters('location')]",
+      "tags": {},
+      "dependsOn": [
+        "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
+        "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]"
+      ],
+      "properties": {
+        "name": "[parameters('name')]",
+        "siteConfig": {
+          "appSettings": [
+            {
+              "name": "FUNCTIONS_EXTENSION_VERSION",
+              "value": "~4"
+            },
+            {
+              "name": "FUNCTIONS_WORKER_RUNTIME",
+              "value": "dotnet-isolated"
+            },
+            {
+              "name": "AzureWebJobsStorage",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value,';EndpointSuffix=','core.windows.net')]"
+            },
+            {
+              "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+              "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value,';EndpointSuffix=','core.windows.net')]"
+            },
+            {
+              "name": "KeyVaultUrl",
+              "value": "parameters('keyVaultUrl')"
+            }
+          ],
+          "cors": {
+            "allowedOrigins": [
+              "https://ms.portal.azure.com"
+            ]
+          },
+          "use32BitWorkerProcess": "[parameters('use32BitWorkerProcess')]",
+          "ftpsState": "[parameters('ftpsState')]",
+          "netFrameworkVersion": "[parameters('netFrameworkVersion')]"
+        },
+        "clientAffinityEnabled": false,
+        "virtualNetworkSubnetId": null,
+        "publicNetworkAccess": "Enabled",
+        "httpsOnly": true,
+        "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
+      }
+    },
+    {
+      "apiVersion": "2018-11-01",
+      "name": "[parameters('hostingPlanName')]",
+      "type": "Microsoft.Web/serverfarms",
+      "location": "[parameters('location')]",
+      "kind": "",
+      "tags": null,
+      "dependsOn": [],
+      "properties": {
+        "name": "[parameters('hostingPlanName')]",
+        "workerSize": "[parameters('workerSize')]",
+        "workerSizeId": "[parameters('workerSizeId')]",
+        "numberOfWorkers": "[parameters('numberOfWorkers')]",
+        "maximumElasticWorkerCount": "20",
+        "zoneRedundant": false
+      },
+      "sku": {
+        "Tier": "[parameters('sku')]",
+        "Name": "[parameters('skuCode')]"
+      }
+    },
+    {
+      "apiVersion": "2022-05-01",
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[parameters('storageAccountName')]",
+      "location": "[parameters('location')]",
+      "tags": null,
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "properties": {
+        "supportsHttpsTrafficOnly": true,
+        "minimumTlsVersion": "TLS1_2",
+        "defaultToOAuthAuthentication": true
+      }
+    }
+  ]
+}
