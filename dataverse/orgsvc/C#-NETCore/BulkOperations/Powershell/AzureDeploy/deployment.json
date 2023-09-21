@@ -52,6 +52,9 @@
     },
     "keyVaultUrl": {
       "type": "string"
+    },
+    "dataverseInstanceUrl":{
+      "type": "string"
     }
   },
   "resources": [
@@ -88,7 +91,11 @@
             },
             {
               "name": "KeyVaultUrl",
-              "value": "parameters('keyVaultUrl')"
+              "value": "[parameters('keyVaultUrl')]"
+            },
+            {
+              "name": "DataverseInstance",
+              "value": "[parameters('dataverseInstanceUrl')]"
             }
           ],
           "cors": {

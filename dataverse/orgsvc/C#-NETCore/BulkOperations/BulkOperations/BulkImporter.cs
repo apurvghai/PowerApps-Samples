@@ -20,7 +20,7 @@ namespace Microsoft.Support.Dataverse.Samples.BulkDataImporter
             _logger = loggerFactory.CreateLogger<BulkImporter>();
         }
 
-        [Function("AzFuncBulkOperationOrchestrator")]
+        [Function("AzBulKOperations")]
         public async Task Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequestData req,
             FunctionContext executionContext)

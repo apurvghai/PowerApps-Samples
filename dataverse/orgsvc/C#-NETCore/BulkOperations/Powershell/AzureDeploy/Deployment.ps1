@@ -25,14 +25,13 @@ $systemUserName = [Environment]::UserName
 $subscriptionId = Read-Host "Enter Azure Subscription ID"
 $resourceGroupName = Read-Host "Enter Resource Group Name"
 $appStorageAccountName = Read-Host "Enter Storage account Name (lowercase alphabets ONLY)"
-
-
-$keyVaultUrl = "https://<KeyVaultURL>.vault.azure.net/"
+$dataverseInstanceUrl = Read-Host "Enter Dataverse Instance URL"
+$keyVaultUrl = Read-Host "Enter Key Vault URL (https://<KeyVaultURL>.vault.azure.net)"
 
 #Auto-Generated Values
 $appName = "$($systemUserName)$($appGeneratedId)"
 $appSharedName = "$($systemUserName)_share"
-$appHostingPlanName = "ASP-$($appName)-$($appGeneratedId)"
+$appHostingPlanName = "ASP-$($appName)"
 
 
 
@@ -97,6 +96,9 @@ $template = @{
     "keyVaultUrl" = @{
       "value" = "$keyVaultUrl"
     }
+    "dataverseInstanceUrl" = @{
+      "value" = "$dataverseInstanceUrl"
+    }
    }
  }
 
@@ -106,14 +108,15 @@ $template | ConvertTo-Json -Depth 2 | Set-Content  -Path $filePath
 #Create Resource Group
 #az functionapp create --resource-group $resourceGroupName -location "eastus"
 
-Write-Host "Setting the Subscription Id As Default"
 
-az account set -s $subscriptionId
 
-Write-Host "Deploying new Function"
+ Write-Host "Setting the Subscription Id As Default"
+ az account set -s $subscriptionId
+ Write-Host "Deploying new Function"
+ az deployment group create --resource-group $($resourceGroupName) --name $($appGeneratedId) --template-file deployment.json --parameters parameters.json
 
-az deployment group create --resource-group $($resourceGroupName) --name $($appGeneratedId) --template-file deployment.json --parameters parameters.json
 
+#Deploy Source Code
 Write-Host "Deploying Source Code"
 az functionapp deployment source config-zip --resource-group $resourceGroupName --name $appName --src $zipdFile
 

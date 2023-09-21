@@ -17,6 +17,5 @@
         public const string PhoneNumber = "cr552_phonenumber";
         public const string PhoneNumberOne = "cr552_phonenumber1";
         public const string CityOne = "cr552_city1";
-        //public const string TTLInSeconds = "TTLInSeconds";
     }
 }

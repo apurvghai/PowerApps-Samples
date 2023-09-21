@@ -1,0 +1,59 @@
+{
+    "parameters":  {
+                       "workerSize":  {
+                                          "value":  "5"
+                                      },
+                       "subscriptionId":  {
+                                              "value":  "a2d3fc1e-8a57-4c67-a508-1aae83d2e832"
+                                          },
+                       "alwaysOn":  {
+                                        "value":  false
+                                    },
+                       "serverFarmResourceGroup":  {
+                                                       "value":  "Commns"
+                                                   },
+                       "location":  {
+                                        "value":  "East US"
+                                    },
+                       "skuCode":  {
+                                       "value":  "EP3"
+                                   },
+                       "websiteContentName":  {
+                                                  "value":  "apurvgh_share"
+                                              },
+                       "ftpsState":  {
+                                         "value":  "FtpsOnly"
+                                     },
+                       "dataverseInstanceUrl":  {
+                                                    "value":  "https://apurvgh-cds.crm.dynamics.com"
+                                                },
+                       "storageAccountName":  {
+                                                  "value":  "testagstrga"
+                                              },
+                       "hostingPlanName":  {
+                                               "value":  "ASP-apurvgh638308858240260841-638308858240260841"
+                                           },
+                       "workerSizeId":  {
+                                            "value":  "5"
+                                        },
+                       "sku":  {
+                                   "value":  "ElasticPremium"
+                               },
+                       "name":  {
+                                    "value":  "apurvgh638308858240260841"
+                                },
+                       "netFrameworkVersion":  {
+                                                   "value":  "v6.0"
+                                               },
+                       "numberOfWorkers":  {
+                                               "value":  "5"
+                                           },
+                       "use32BitWorkerProcess":  {
+                                                     "value":  false
+                                                 },
+                       "keyVaultUrl":  {
+                                           "value":  "https://testkeyvaultag.vault.azure.net/"
+                                       }
+                   },
+    "contentVersion":  "1.0.0.0"
+}
