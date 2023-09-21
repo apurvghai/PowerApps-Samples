@@ -90,7 +90,8 @@ These instructions will get you a copy of the project up and running on your loc
    * Select your Azure Function Identity
    * Hit Next, thenm Create
 
-   > [!IMPORTANT] If you key vault is enabled for `Azure role-based access control`. Then you must assign RBAC Role of `Key Vault Secrets officer` to that system identity.
+   > [!IMPORTANT] 
+   > If you key vault is enabled for `Azure role-based access control`. Then you must assign RBAC Role of `Key Vault Secrets officer` to that system identity.
 
  ### Post Deployment (Testing the app)
 
